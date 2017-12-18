@@ -1,4 +1,4 @@
-package com.alliejc.shoppingfeed;
+package com.alliejc.shoppingfeed.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alliejc.shoppingfeed.R;
 import com.alliejc.shoppingfeed.articles.Article;
+import com.alliejc.shoppingfeed.articles.Datum;
 import com.alliejc.shoppingfeed.viewholder.ArticleViewHolder;
 
 import java.util.ArrayList;
@@ -14,10 +16,11 @@ import java.util.List;
 
 
 public class ArticleFeedAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
-    private List<Article> mArticleList;
+    private Article mArticle;
 
-    public ArticleFeedAdapter() {
-        mArticleList = new ArrayList<>();
+    public ArticleFeedAdapter()
+    {
+
     }
 
     @Override
@@ -29,25 +32,26 @@ public class ArticleFeedAdapter extends RecyclerView.Adapter<ArticleViewHolder> 
 
     @Override
     public void onBindViewHolder(ArticleViewHolder holder, int position) {
-        String title = mArticleList.get(position).getData().get(position).getTitle();
-        String image = mArticleList.get(position).getData().get(position).getUrl();
-        String date = mArticleList.get(position).getData().get(position).getPublishedAt();
-        Log.e("date", date);
-        Log.e("title", title);
+//        Datum datum = new Datum();
+//        datum = mArticleList.get(position).getData().get(position);
+        String title = mArticle.getData().get(position).getTitle();
+        String image = mArticle.getData().get(position).getUrl();
+        String date = mArticle.getData().get(position).getPublishedAt();
+
         holder.onBind(title, image, date);
     }
 
     @Override
     public int getItemCount() {
-        if(mArticleList != null){
-            return mArticleList.size();
+        if(mArticle.getData() != null){
+            return mArticle.getData().size();
         } else {
             return 0;
         }
     }
 
-    public void addArticles(List<Article> articles){
-        mArticleList.addAll(articles);
+    public void addArticle(Article article){
+        mArticle = article;
         notifyDataSetChanged();
     }
 }

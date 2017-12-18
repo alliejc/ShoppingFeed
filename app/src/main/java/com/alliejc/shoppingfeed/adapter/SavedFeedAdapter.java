@@ -1,10 +1,11 @@
-package com.alliejc.shoppingfeed;
+package com.alliejc.shoppingfeed.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alliejc.shoppingfeed.R;
 import com.alliejc.shoppingfeed.savedsearch.SavedSearch;
 import com.alliejc.shoppingfeed.viewholder.SavedSearchViewHolder;
 

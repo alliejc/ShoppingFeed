@@ -1,18 +1,13 @@
-package com.alliejc.shoppingfeed;
+package com.alliejc.shoppingfeed.grailed;
 
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Singleton
 public class GrailedService {
 
     private static GrailedService mGrailedService;
@@ -27,7 +22,6 @@ public class GrailedService {
         }
     }
 
-    @Inject
     public GrailedService(){
         Gson gson = new GsonBuilder()
                 .setLenient()

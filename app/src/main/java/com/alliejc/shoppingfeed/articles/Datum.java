@@ -1,6 +1,9 @@
 
 package com.alliejc.shoppingfeed.articles;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
@@ -139,5 +142,4 @@ public class Datum {
     public void setUrl(String url) {
         mUrl = url;
     }
-
 }

@@ -9,8 +9,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.alliejc.shoppingfeed.articles.Article;
+import com.alliejc.shoppingfeed.articles.Datum;
 import com.alliejc.shoppingfeed.fragment.ArticlesFragment;
 import com.alliejc.shoppingfeed.fragment.SavedSearchFragment;
+import com.alliejc.shoppingfeed.grailed.GrailedService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout mTabLayout;
     private GrailedService mGrailedService;
-    private List<Article> mArticleList;
-
+    private Article mArticle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mGrailedService = GrailedService.getGrailedService();
-        mArticleList = new ArrayList<>();
+        getArticles();
         setUpTabs();
     }
 
@@ -46,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 FragmentManager fragmentManager = getSupportFragmentManager();
 
                 if (tab.getPosition() == 0) {
-                    getArticles();
-                    ArticlesFragment articlesFragment = ArticlesFragment.getInstance(mArticleList);
+                    ArticlesFragment articlesFragment = ArticlesFragment.getInstance(mArticle);
                     fragmentManager
                             .beginTransaction()
                             .replace(R.id.main_framelayout, articlesFragment)
@@ -84,15 +84,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getArticles(){
-        mArticleList = new ArrayList<>();
+//        mArticleList = new ArrayList<>();
         Call call = mGrailedService.getArticles();
+
         call.enqueue(new Callback<Article>() {
             @Override
             public void onResponse(@NonNull Call<Article> call, @NonNull Response<Article> response) {
                 if (response.isSuccessful()) {
                     Log.e("successful", response.toString());
-                    mArticleList.add(response.body());
-                    Log.e("list", mArticleList.toString());
+                    mArticle.setData(response.body().getData());
+                    mArticle.setMetadata(response.body().getMetadata());
 
                 } else {
                     Toast.makeText(MainActivity.this, "Error onresponse", Toast.LENGTH_SHORT).show();
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Article> call, Throwable t) {
+                Log.e("on failure", call.toString() + "--" + t.toString() + "--"+ t.getMessage());
                 Toast.makeText(MainActivity.this, "Error on Failure", Toast.LENGTH_SHORT).show();
 
             }

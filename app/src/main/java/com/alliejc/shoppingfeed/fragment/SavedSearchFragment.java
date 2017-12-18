@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alliejc.shoppingfeed.R;
-import com.alliejc.shoppingfeed.SavedFeedAdapter;
+import com.alliejc.shoppingfeed.adapter.SavedFeedAdapter;
 
 
 public class SavedSearchFragment extends Fragment {

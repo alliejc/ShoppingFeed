@@ -2,32 +2,39 @@ package com.alliejc.shoppingfeed.fragment;
 
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.alliejc.shoppingfeed.ArticleFeedAdapter;
+import com.alliejc.shoppingfeed.adapter.ArticleFeedAdapter;
 import com.alliejc.shoppingfeed.R;
 import com.alliejc.shoppingfeed.articles.Article;
+import com.alliejc.shoppingfeed.articles.Datum;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArticlesFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private ArticleFeedAdapter mAdapter;
-    private List<Article> mArticleList;
+    private Article mArticle;
 
     public ArticlesFragment() {
     }
 
-    public static ArticlesFragment getInstance(List<Article> list){
+    public static ArticlesFragment getInstance(Article article){
         ArticlesFragment articlesFragment = new ArticlesFragment();
-        articlesFragment.mArticleList = list;
+        Bundle args = new Bundle();
+        articlesFragment.mArticle = article;
+//        args.putParcelableArrayList("article", (ArrayList<? extends Parcelable>) list);
+//        articlesFragment.setArguments(args);
         return articlesFragment;
     }
 
@@ -36,6 +43,7 @@ public class ArticlesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
         mRecyclerView = view.findViewById(R.id.feed);
+
         return view;
     }
 
@@ -53,8 +61,8 @@ public class ArticlesFragment extends Fragment {
 
         mAdapter = new ArticleFeedAdapter();
         mRecyclerView.setAdapter(mAdapter);
-        if(mArticleList != null) {
-            mAdapter.addArticles(mArticleList);
+        if(mArticle != null) {
+            mAdapter.addArticle(mArticle);
         }
     }
 }

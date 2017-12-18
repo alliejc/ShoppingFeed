@@ -25,7 +25,7 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder{
 
     public void onBind(String title, String image, String date){
         mArticleTitle.setText(title);
-        mArticleImage.setImageURI(Uri.parse(image));
+//        mArticleImage.setImageURI(Uri.parse(image));
         mPublishedDate.setText(date);
     }
 }
