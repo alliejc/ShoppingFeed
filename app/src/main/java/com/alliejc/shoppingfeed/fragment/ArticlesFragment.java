@@ -24,17 +24,14 @@ public class ArticlesFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private ArticleFeedAdapter mAdapter;
-    private Article mArticle;
+    private List<Datum> mDatumList;
 
     public ArticlesFragment() {
     }
 
-    public static ArticlesFragment getInstance(Article article){
+    public static ArticlesFragment getInstance(List<Datum> datumList){
         ArticlesFragment articlesFragment = new ArticlesFragment();
-        Bundle args = new Bundle();
-        articlesFragment.mArticle = article;
-//        args.putParcelableArrayList("article", (ArrayList<? extends Parcelable>) list);
-//        articlesFragment.setArguments(args);
+        articlesFragment.mDatumList = datumList;
         return articlesFragment;
     }
 
@@ -59,10 +56,9 @@ public class ArticlesFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new ArticleFeedAdapter();
+        mAdapter = new ArticleFeedAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
-        if(mArticle != null) {
-            mAdapter.addArticle(mArticle);
-        }
+        mAdapter.updateAdapter(mDatumList);
+
     }
 }

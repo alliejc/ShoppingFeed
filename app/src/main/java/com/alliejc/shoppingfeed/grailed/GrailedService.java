@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 
 public class GrailedService {
 
@@ -30,6 +31,7 @@ public class GrailedService {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://www.grailed.com/api/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
         mGrailedServiceInterface = retrofit.create(GrailedServiceInterface.class);

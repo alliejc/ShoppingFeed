@@ -13,6 +13,7 @@ import com.alliejc.shoppingfeed.articles.Datum;
 import com.alliejc.shoppingfeed.fragment.ArticlesFragment;
 import com.alliejc.shoppingfeed.fragment.SavedSearchFragment;
 import com.alliejc.shoppingfeed.grailed.GrailedService;
+import com.alliejc.shoppingfeed.util.ImageSizer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout mTabLayout;
     private GrailedService mGrailedService;
     private Article mArticle;
+    private Datum datum;
+    private List<Datum> mDatumList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mGrailedService = GrailedService.getGrailedService();
+        mDatumList = new ArrayList<>();
+        loadArticles();
         getArticles();
         setUpTabs();
     }
@@ -47,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 FragmentManager fragmentManager = getSupportFragmentManager();
 
                 if (tab.getPosition() == 0) {
-                    ArticlesFragment articlesFragment = ArticlesFragment.getInstance(mArticle);
+                    ArticlesFragment articlesFragment = ArticlesFragment.getInstance(mDatumList);
                     fragmentManager
                             .beginTransaction()
                             .replace(R.id.main_framelayout, articlesFragment)
@@ -76,25 +81,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-//        if (getFragmentManager().getBackStackEntryCount() > 0) {
-//            getFragmentManager().popBackStackImmediate();
-//        }
+    public void loadArticles() {
+        mGrailedService.getArticles().enqueue(new Callback<Datum>() {
+            @Override
+            public void onResponse(Call<Datum> call, Response<Datum> response) {
+                if (response.isSuccessful()) {
+                    Log.e("successful", response.toString());
+                }
+            }
+            @Override
+            public void onFailure(Call<Datum> call, Throwable t) {
+                    Log.e("on failure", call.toString() + "--" + t.toString() + "--"+ t.getMessage());
+                    Toast.makeText(MainActivity.this, "Error on Failure", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void getArticles(){
-//        mArticleList = new ArrayList<>();
-        Call call = mGrailedService.getArticles();
+    Call call = mGrailedService.getArticles();
 
         call.enqueue(new Callback<Article>() {
             @Override
             public void onResponse(@NonNull Call<Article> call, @NonNull Response<Article> response) {
                 if (response.isSuccessful()) {
-                    Log.e("successful", response.toString());
-                    mArticle.setData(response.body().getData());
-                    mArticle.setMetadata(response.body().getMetadata());
-
+                    mDatumList.addAll(response.body().getData());
                 } else {
                     Toast.makeText(MainActivity.this, "Error onresponse", Toast.LENGTH_SHORT).show();
                 }

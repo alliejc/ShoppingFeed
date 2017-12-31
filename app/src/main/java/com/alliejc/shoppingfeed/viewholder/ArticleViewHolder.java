@@ -1,5 +1,6 @@
 package com.alliejc.shoppingfeed.viewholder;
 
+import android.content.Context;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alliejc.shoppingfeed.R;
+import com.alliejc.shoppingfeed.util.ImageSizer;
+import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 
 public class ArticleViewHolder extends RecyclerView.ViewHolder{
@@ -23,9 +27,14 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder{
         mArticleTitle = (TextView) itemView.findViewById(R.id.article_title);
     }
 
-    public void onBind(String title, String image, String date){
+    public void onBind(Context context, String title, String image, String date){
         mArticleTitle.setText(title);
-//        mArticleImage.setImageURI(Uri.parse(image));
         mPublishedDate.setText(date);
+
+        Glide.with(context).load(image).into(mArticleImage);
+//        Picasso.with(context).load(image).fit().centerCrop()
+//                .placeholder(R.mipmap.ic_launcher)
+//                .error(R.mipmap.ic_launcher)
+//                .into(mArticleImage);
     }
 }
