@@ -12,6 +12,7 @@ import com.alliejc.shoppingfeed.R;
 import com.alliejc.shoppingfeed.articles.Article;
 import com.alliejc.shoppingfeed.articles.Datum;
 import com.alliejc.shoppingfeed.util.ImageSizer;
+import com.alliejc.shoppingfeed.util.Util;
 import com.alliejc.shoppingfeed.viewholder.ArticleViewHolder;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class ArticleFeedAdapter extends RecyclerView.Adapter<ArticleViewHolder> 
         Datum datum = mDataumList.get(holder.getAdapterPosition());
         String title = datum.getTitle();
         String image = ImageSizer.resizeImage(datum.getHero());
-        String date = datum.getPublishedAt();
+        String date = Util.setDateParsing(datum.getPublishedAt());
 
         holder.onBind(mContext, title, image, date);
     }

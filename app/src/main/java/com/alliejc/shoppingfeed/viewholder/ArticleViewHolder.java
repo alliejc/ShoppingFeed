@@ -1,7 +1,9 @@
 package com.alliejc.shoppingfeed.viewholder;
 
 import android.content.Context;
+import android.net.ParseException;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,6 +14,11 @@ import com.alliejc.shoppingfeed.R;
 import com.alliejc.shoppingfeed.util.ImageSizer;
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class ArticleViewHolder extends RecyclerView.ViewHolder{
@@ -32,9 +39,8 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder{
         mPublishedDate.setText(date);
 
         Glide.with(context).load(image).into(mArticleImage);
-//        Picasso.with(context).load(image).fit().centerCrop()
-//                .placeholder(R.mipmap.ic_launcher)
-//                .error(R.mipmap.ic_launcher)
-//                .into(mArticleImage);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mArticleImage.setClipToOutline(true);
+        }
     }
 }
