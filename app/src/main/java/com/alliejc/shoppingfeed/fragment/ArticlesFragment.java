@@ -7,19 +7,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.alliejc.shoppingfeed.adapter.ArticleFeedAdapter;
 import com.alliejc.shoppingfeed.R;
-import com.alliejc.shoppingfeed.articles.Article;
 import com.alliejc.shoppingfeed.articles.Datum;
 
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: handle pagination
 public class ArticlesFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
@@ -59,6 +58,5 @@ public class ArticlesFragment extends Fragment {
         mAdapter = new ArticleFeedAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.updateAdapter(mDatumList);
-
     }
 }

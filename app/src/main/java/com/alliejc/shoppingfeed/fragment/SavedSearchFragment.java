@@ -11,19 +11,23 @@ import android.view.ViewGroup;
 
 import com.alliejc.shoppingfeed.R;
 import com.alliejc.shoppingfeed.adapter.SavedFeedAdapter;
+import com.alliejc.shoppingfeed.savedsearch.Datum;
+
+import java.util.List;
 
 
 public class SavedSearchFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private SavedFeedAdapter mAdapter;
+    private List<Datum> mDatumList;
 
     public SavedSearchFragment() {
     }
 
-    public static SavedSearchFragment getInstance(){
+    public static SavedSearchFragment getInstance(List<Datum> datumList){
         SavedSearchFragment savedSearchFragment = new SavedSearchFragment();
-
+        savedSearchFragment.mDatumList = datumList;
         return savedSearchFragment;
     }
 
@@ -38,7 +42,6 @@ public class SavedSearchFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setRecyclerView();
     }
 
@@ -47,9 +50,10 @@ public class SavedSearchFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new SavedFeedAdapter();
+        mAdapter = new SavedFeedAdapter(getContext());
 
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.updateAdapter(mDatumList);
     }
 
 }

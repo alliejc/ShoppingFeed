@@ -43,5 +43,9 @@ public class GrailedService {
 
     public Call getArticlesNext(int currPage){
             return mGrailedServiceInterface.articlesNextPage(currPage);
-        }
+    }
+
+    public Call getSavedSearches() {
+        return mGrailedServiceInterface.savedSearchList();
+    }
 }

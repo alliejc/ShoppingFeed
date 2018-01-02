@@ -1,12 +1,15 @@
 package com.alliejc.shoppingfeed.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.alliejc.shoppingfeed.R;
+import com.alliejc.shoppingfeed.savedsearch.Datum;
 import com.alliejc.shoppingfeed.savedsearch.SavedSearch;
+import com.alliejc.shoppingfeed.util.ImageSizer;
 import com.alliejc.shoppingfeed.viewholder.SavedSearchViewHolder;
 
 import java.util.ArrayList;
@@ -14,9 +17,11 @@ import java.util.List;
 
 
 public class SavedFeedAdapter extends RecyclerView.Adapter<SavedSearchViewHolder> {
-    private List<SavedSearch> mSavedSearchList;
+    private List<Datum> mSavedSearchList;
+    private Context mContext;
 
-    public SavedFeedAdapter() {
+    public SavedFeedAdapter(Context context) {
+        this.mContext = context;
         mSavedSearchList = new ArrayList<>();
     }
 
@@ -29,10 +34,11 @@ public class SavedFeedAdapter extends RecyclerView.Adapter<SavedSearchViewHolder
 
     @Override
     public void onBindViewHolder(SavedSearchViewHolder holder, int position) {
-//        String title;
-//        Uri image;
-//        String date;
-//        holder.onBind(title, image, date);
+        Datum datum = mSavedSearchList.get(holder.getAdapterPosition());
+        String title = datum.getName();
+        String image = ImageSizer.resizeImage(datum.getImageUrl());
+
+        holder.onBind(mContext, title, image);
     }
 
     @Override
@@ -44,7 +50,8 @@ public class SavedFeedAdapter extends RecyclerView.Adapter<SavedSearchViewHolder
         }
     }
 
-    public void addArticles(List<SavedSearch> searches){
-        mSavedSearchList.addAll(searches);
+    public void updateAdapter(List<Datum> list){
+        mSavedSearchList.addAll(list);
+        notifyDataSetChanged();
     }
 }

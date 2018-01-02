@@ -20,7 +20,6 @@ import java.util.List;
 
 
 public class ArticleFeedAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
-    private Article mArticle;
     private List<Datum> mDataumList;
     private Context mContext;
 
@@ -53,12 +52,6 @@ public class ArticleFeedAdapter extends RecyclerView.Adapter<ArticleViewHolder> 
         } else {
             return 0;
         }
-    }
-
-
-    public void addArticle(Article article){
-        mArticle = article;
-        notifyDataSetChanged();
     }
 
     public void updateAdapter(List<Datum> list){

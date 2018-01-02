@@ -3,6 +3,7 @@ package com.alliejc.shoppingfeed.grailed;
 import com.alliejc.shoppingfeed.articles.Article;
 import com.alliejc.shoppingfeed.articles.Datum;
 import com.alliejc.shoppingfeed.articles.Metadata;
+import com.alliejc.shoppingfeed.savedsearch.SavedSearch;
 
 import java.util.List;
 
@@ -21,4 +22,7 @@ public interface GrailedServiceInterface {
 
     @GET("articles/ios_index")
     Call<List<Article>> articlesNextPage(@Query("page") int page);
+
+    @GET("merchandise/marquee")
+    Call<SavedSearch> savedSearchList();
 }
