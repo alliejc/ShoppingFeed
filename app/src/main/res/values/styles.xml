@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Tabs" parent="Base.Widget.Design.TabLayout">
+        <item name="tabBackground">@color/white</item>
+        <item name="tabIndicatorColor">@color/colorPrimaryDark</item>
+        <item name="tabSelectedTextColor">@color/black</item>
+        <item name="tabTextAppearance">@color/subtitle_grey</item>
+    </style>
+
 </resources>

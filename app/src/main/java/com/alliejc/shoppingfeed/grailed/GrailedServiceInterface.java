@@ -21,7 +21,7 @@ public interface GrailedServiceInterface {
     Call<Article> articleList();
 
     @GET("articles/ios_index")
-    Call<List<Article>> articlesNextPage(@Query("page") int page);
+    Call<Article> articlesNextPage(@Query("page") int page);
 
     @GET("merchandise/marquee")
     Call<SavedSearch> savedSearchList();

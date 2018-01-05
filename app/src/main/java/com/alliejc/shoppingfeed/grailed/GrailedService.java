@@ -41,8 +41,8 @@ public class GrailedService {
         return mGrailedServiceInterface.articleList();
     }
 
-    public Call getArticlesNext(int currPage){
-            return mGrailedServiceInterface.articlesNextPage(currPage);
+    public Call getArticlesNext(int nextPage){
+            return mGrailedServiceInterface.articlesNextPage(nextPage);
     }
 
     public Call getSavedSearches() {

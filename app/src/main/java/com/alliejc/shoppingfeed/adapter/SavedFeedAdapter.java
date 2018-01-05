@@ -35,10 +35,7 @@ public class SavedFeedAdapter extends RecyclerView.Adapter<SavedSearchViewHolder
     @Override
     public void onBindViewHolder(SavedSearchViewHolder holder, int position) {
         Datum datum = mSavedSearchList.get(holder.getAdapterPosition());
-        String title = datum.getName();
-        String image = ImageSizer.resizeImage(datum.getImageUrl());
-
-        holder.onBind(mContext, title, image);
+        holder.onBind(mContext, datum);
     }
 
     @Override

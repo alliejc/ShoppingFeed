@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alliejc.shoppingfeed.R;
+import com.alliejc.shoppingfeed.savedsearch.Datum;
+import com.alliejc.shoppingfeed.util.ImageSizer;
 import com.bumptech.glide.Glide;
 
 import java.net.URI;
@@ -25,7 +27,10 @@ public class SavedSearchViewHolder extends RecyclerView.ViewHolder {
         mSavedTitle = (TextView) itemView.findViewById(R.id.saved_title);
     }
 
-    public void onBind(Context context, String title, String image){
+    public void onBind(Context context, Datum datum){
+        String title = datum.getName();
+        String image = ImageSizer.resizeImage(datum.getImageUrl());
+
         mSavedTitle.setText(title);
         Glide.with(context).load(image).into(mSavedImage);
 
