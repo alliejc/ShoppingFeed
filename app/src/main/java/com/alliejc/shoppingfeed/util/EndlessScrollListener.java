@@ -28,7 +28,6 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
                 maxSize = lastVisibleItemPositions[i];
             }
         }
-        Log.e("get last visible-max", String.valueOf(maxSize));
         return maxSize;
     }
 
@@ -39,9 +38,6 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
 
         int[] lastVisibleItemPositions = ((StaggeredGridLayoutManager) mLayoutManager).findLastVisibleItemPositions(null);
         lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions);
-
-        Log.e("on scrolled-last vis", String.valueOf(lastVisibleItemPosition));
-        Log.e("onscrolled - total", String.valueOf(totalItemCount));
 
         if (totalItemCount < previousTotalItemCount) {
             this.currentPage = this.startingPageIndex;
@@ -61,12 +57,6 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
             onLoadMore(currentPage, totalItemCount, view);
             loading = true;
         }
-    }
-
-    public void resetState() {
-        this.currentPage = this.startingPageIndex;
-        this.previousTotalItemCount = 0;
-        this.loading = true;
     }
 
     public abstract void onLoadMore(int page, int totalItemsCount, RecyclerView view);

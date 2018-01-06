@@ -1,13 +1,5 @@
 package com.alliejc.shoppingfeed.util;
 
-import android.util.Log;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-
 // changed base url from https://cdn.fs.grailed.com/
 public class ImageSizer {
 
@@ -18,7 +10,6 @@ public class ImageSizer {
         int width = 200;
         String newUrl = String.format(IMAGE_BASE_URL, width, url);
 
-        Log.e("url", newUrl);
         return newUrl;
     }
         }

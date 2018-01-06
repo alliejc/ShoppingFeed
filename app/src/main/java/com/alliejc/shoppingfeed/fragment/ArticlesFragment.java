@@ -72,8 +72,6 @@ public class ArticlesFragment extends Fragment {
         scrollListener = new EndlessScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                Log.e("page", String.valueOf(page));
-                Log.e("totalItemsCount", String.valueOf(totalItemsCount));
                 mGrailedService = GrailedService.getGrailedService();
                 getArticles(page);
             }
